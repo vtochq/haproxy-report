@@ -17,7 +17,7 @@ fi
 
 if [ -z $1 ] || [ "$1" == "help" ];
 then
-	echo -e "Usage:\ngeo <backend> [<logfile>] - geo stat by backend\ngeo report ["backends" (space separated)] - generate daily report by backends [<logfile>]\ngeo list [<logfile>] - list frontends and backends\n"
+	echo -e "Usage:\ngeo <backend> [<logfile>] - geo stat by backend\ngeo report <\"backends\" (space separated) | all> - generate daily report by backends [<logfile>]\ngeo list [<logfile>] - list frontends and backends\n"
 elif [ "$1" == "list" ]
 then
 	get_Xends
@@ -26,9 +26,8 @@ then
 elif  [ "$1" == "report" ]
 then
 	echo  -e "Daily report by backends\n"
-	if [ -z "$2" ] || [ "$2" == "${!#}" ] ;
+	if [ "$2" == "all" ];
 	then
-		#frontends="$(cat $file | awk '{ print $3 }' | grep -v "stopped" | sort -r | uniq)"
 		get_Xends
 	else
 		backends="$2"
